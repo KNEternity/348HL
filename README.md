@@ -1,12 +1,15 @@
-Term Project: Boolean Logic Simulator
+# Term Project: Boolean Logic Simulator
 
 This project revolves around creating a boolean logic simulator that replicates the behavior of complex logic circuits with multiple gates, input & output signals, and operations such as AND, OR, NOT, NAND, and XOR.
 
-Essential Links:
-- [Meeting Docs](docs/meetingLogs)
-- [Project Plan](docs/projectPlans)
+## Essential Links:
+- [Documentation](docs)
+  - [Meeting Docs](docs/meetingLogs)
+  - [Project Plan](docs/projectPlans)
+  - [Software Requirements](docs/SoftwareRequirementsSpec)
+  - [Software Architecture](docs/SoftwareArchitecture)
 
-News:
+## News:
 - 02/19/2024: Team meeting --> introductions, roles, and set tentative timeline for project
 - 02/20/2024: Completed project plan
 - 02/28/2024: Completed Software Requirements Specification (SRS) outline
