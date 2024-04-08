@@ -7,7 +7,6 @@ This project revolves around creating a boolean logic simulator that replicates 
   - [Meeting Docs](docs/meetingLogs)
   - [Project Plan](docs/projectPlans)
   - [Software Requirements](docs/SoftwareRequirementsSpec)
-  - [Software Architecture](docs/SoftwareArchitecture)
 
 ## News:
 - 02/19/2024: Team meeting --> introductions, roles, and set tentative timeline for project
@@ -20,3 +19,14 @@ This project revolves around creating a boolean logic simulator that replicates 
 - 03/23/2024: Updated Project Plan --> added two teams that will work on different components of simulator
 - 03/25/2024: Team meeting --> discussed SRS document progress and roadblocks
 - 04/01/2024: Team meeting --> reviewed feedback of SRS document and reviewed Software Architecture Document
+
+## Team information
+| Name          | Role          | Availability     |
+| ------------- |:-------------:| -----           :|
+| Kevinh Nguyen | Team Leader / Team 1 member  |   |
+| Changwen Gong  Technical Leader / Team 2 member| |
+| Rajkunwar Kaura| Product Owner / Team 1 member   |
+| Riley England  Technical Leader / Team 2 member  |  
+| Kemar Wilson | Project Team Leader 1 |         $ |
+| Changwen Gong  Project Team Leader 2   |     $12 |
+
