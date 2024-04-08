@@ -26,7 +26,7 @@ This project revolves around creating a boolean logic simulator that replicates 
 | Kevinh Nguyen    | Team Leader / Team 1 member      | Monday-Sunday: 9am - 9pm |
 | Changwen Gong    | Technical Leader / Team 2 member | Monday-Sunday: 9am - 9pm |
 | Rajkunwar Kaura  | Product Owner / Team 1 member    | Monday-Sunday: 9am - 9pm |         
-| Riley England    | Technical Leader / Team 2 member | Monday-Sunday: 9am - 9pm |          
+| Riley England    | Quality Assurance / Team 2 member| Monday-Sunday: 9am - 9pm |          
 | Kemar Wilson     | Project Team Leader 1            | Monday-Sunday: 9am - 9pm |   
 | Abdulahi Mohamed | Project Team Leader 2            | Monday-Friday: 9am - 9pm |   
 
