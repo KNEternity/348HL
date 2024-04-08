@@ -1,4 +1,4 @@
-## Term Project: Boolean Logic Simulator
+# Term Project: Boolean Logic Simulator
 
 This project revolves around creating a boolean logic simulator that replicates the behavior of complex logic circuits with multiple gates, input & output signals, and operations such as AND, OR, NOT, NAND, and XOR.
 
