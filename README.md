@@ -21,12 +21,12 @@ This project revolves around creating a boolean logic simulator that replicates 
 - 04/01/2024: Team meeting --> reviewed feedback of SRS document and reviewed Software Architecture Document
 
 ## Team information
-| Name          | Role          | Availability     |
-| ------------- |:-------------:| -----           :|
-| Kevinh Nguyen | Team Leader / Team 1 member  |   |
-| Changwen Gong  Technical Leader / Team 2 member| |
-| Rajkunwar Kaura| Product Owner / Team 1 member   |
-| Riley England  Technical Leader / Team 2 member  |  
-| Kemar Wilson | Project Team Leader 1 |         $ |
-| Changwen Gong  Project Team Leader 2   |     $12 |
+| Name           | Role                             | Availability  |
+| -------------- | -------------------------------- | ------------- |
+| Kevinh Nguyen  | Team Leader / Team 1 member      |               |
+| Changwen Gong  | Technical Leader / Team 2 member |               |
+| Rajkunwar Kaura| Product Owner / Team 1 member     |               |
+| Riley England  | Technical Leader / Team 2 member  |               |
+| Kemar Wilson   | Project Team Leader 1            |       $       |
+| Changwen Gong  | Project Team Leader 2            |     $12       |
 
