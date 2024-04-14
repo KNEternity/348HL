@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/E6EKI5G/OneDrive-Deere&Co/OneDrive - Deere & Co/Desktop/New folder/New folder/School/EECS 348/Code/Lab6",
-      "program": "c:/Users/E6EKI5G/OneDrive-Deere&Co/OneDrive - Deere & Co/Desktop/New folder/New folder/School/EECS 348/Code/Lab6/build/Debug/outDebug",
+      "cwd": ".",
+      "program": "build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
