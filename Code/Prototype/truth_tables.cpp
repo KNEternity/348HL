@@ -3,8 +3,8 @@
 // Function to generate truth table for logical AND operation
 void generateTruthTableAND()
 {
-    std::cout << "Truth Table for Logical AND Operation" << std::endl;
-    std::cout << "A\tB\tResult" << std::endl;
+    std::cout << "Truth Table for Logical \033[1;32mAND\033[0m Operation" << std::endl;
+    std::cout << "\033[1;32mA\tB\tResult\033[0m" << std::endl;
     for (char a : {'T', 'F'})
     {
         for (char b : {'T', 'F'})
@@ -18,8 +18,8 @@ void generateTruthTableAND()
 // Function to generate truth table for logical OR operation
 void generateTruthTableOR()
 {
-    std::cout << "Truth Table for Logical OR Operation" << std::endl;
-    std::cout << "A\tB\tResult" << std::endl;
+    std::cout << "Truth Table for Logical \033[1;32mOR\033[0m Operation" << std::endl;
+    std::cout << "\033[1;32mA\tB\tResult\033[0m" << std::endl;
     for (char a : {'T', 'F'})
     {
         for (char b : {'T', 'F'})
@@ -33,8 +33,8 @@ void generateTruthTableOR()
 // Function to generate truth table for logical NOT operation
 void generateTruthTableNOT()
 {
-    std::cout << "Truth Table for Logical NOT Operation" << std::endl;
-    std::cout << "A\tResult" << std::endl;
+    std::cout << "Truth Table for Logical \033[1;32mNOT\033[0m Operation" << std::endl;
+    std::cout << "\033[1;32mA\tResult\033[0m" << std::endl;
     for (char a : {'T', 'F'})
     {
         std::cout << a << "\t" << (a == 'T' ? 'F' : 'T') << std::endl;
@@ -45,8 +45,8 @@ void generateTruthTableNOT()
 // Function to generate truth table for logical NAND operation
 void generateTruthTableNAND()
 {
-    std::cout << "Truth Table for Logical NAND Operation" << std::endl;
-    std::cout << "A\tB\tResult" << std::endl;
+    std::cout << "Truth Table for Logical \033[1;32mNAND\033[0m Operation" << std::endl;
+    std::cout << "\033[1;32mA\tB\tResult\033[0m" << std::endl;
     for (char a : {'T', 'F'})
     {
         for (char b : {'T', 'F'})
@@ -60,8 +60,8 @@ void generateTruthTableNAND()
 // Function to generate truth table for logical XOR operation
 void generateTruthTableXOR()
 {
-    std::cout << "Truth Table for Logical XOR Operation" << std::endl;
-    std::cout << "A\tB\tResult" << std::endl;
+    std::cout << "Truth Table for Logical \033[1;32mXOR\033[0m Operation" << std::endl;
+    std::cout << "\033[1;32mA\tB\tResult\033[0m" << std::endl;
     for (char a : {'T', 'F'})
     {
         for (char b : {'T', 'F'})
