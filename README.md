@@ -8,6 +8,7 @@ This project revolves around creating a boolean logic simulator that replicates 
   - [Project Plan](docs/projectPlans)
   - [Software Requirements](docs/SoftwareRequirementsSpec)
   - [Software Architecture](docs/SoftwareArchitecture)
+  - [User Manual](docs/userManual)
 
 ## News:
 - 02/19/2024: Team meeting --> introductions, roles, and set tentative timeline for project
@@ -23,7 +24,9 @@ This project revolves around creating a boolean logic simulator that replicates 
 - 04/08/2024: Team meeting --> discussed architecture document and worked on it
 - 04/14/2024: Completed Software Architecture outline
 - 04/15/2024: Team meeting --> reviewed Software Architecture outline and discussed simulator implementation
-
+- 04/22/2024: Team meeting --> divied up remaining tasks and discusses project progress
+- 04/29/2024: Team meeting --> discussed project progress, updated SRS document, and code editing
+- 05/02/2024: Completed User Manual, User test cases, and Boolean Logic Simulator implementation
 
 
 ## Team information
