@@ -57,14 +57,26 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
         }
         else if (c == ')')
         {
-            while (!operators.empty() && operators.top() != '(')
+            if (operators.empty())
+            {
+                throw std::invalid_argument("Mismatched parentheses: Missing opening parenthesis");
+            }
+            while (operators.top() != '(')
             {
                 char op = operators.top();
                 operators.pop();
-                bool operand2 = operands.top();
-                operands.pop();
+                if (operands.size() < 1)
+                {
+                    throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
+                }
                 if (op != '!')
                 {
+                    bool operand2 = operands.top();
+                    operands.pop();
+                    if (operands.empty())
+                    {
+                        throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
+                    }
                     bool operand1 = operands.top();
                     operands.pop();
                     if (op == '&')
@@ -86,53 +98,33 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
                 }
                 else
                 {
-                    operands.push(NOT(operand2));
+                    operands.push(NOT(operands.top()));
                 }
             }
-            if (!operators.empty())
-            {
-                operators.pop(); // Remove the '('
-            }
+            operators.pop(); // Remove the '('
         }
-        else if (c == '&' || c == '|' || c == '!' || c == '@' || c == '$')
+        else if (c == '&' || c == '|' || c == '@' || c == '$' || c == '!')
         {
-            while (!operators.empty() && getPrecedence(operators.top()) >= getPrecedence(c))
+            if (!operands.empty() && (operators.empty() || operators.top() == '(' || getPrecedence(operators.top()) < getPrecedence(c)))
             {
-                char op = operators.top();
-                operators.pop();
-                bool operand2 = operands.top();
-                operands.pop();
-                if (op != '!')
-                {
-                    bool operand1 = operands.top();
-                    operands.pop();
-                    if (op == '&')
-                    {
-                        operands.push(AND(operand1, operand2));
-                    }
-                    else if (op == '|')
-                    {
-                        operands.push(OR(operand1, operand2));
-                    }
-                    else if (op == '@')
-                    {
-                        operands.push(NAND(operand1, operand2));
-                    }
-                    else if (op == '$')
-                    {
-                        operands.push(XOR(operand1, operand2));
-                    }
-                }
-                else
-                {
-                    operands.push(NOT(operand2));
-                }
+                operators.push(c);
             }
-            operators.push(c);
+            else
+            {
+                throw std::invalid_argument("Invalid expression: Unexpected operator '" + std::string(1, c) + "'");
+            }
         }
         else if (isalpha(c))
         {
+            if (variables.find(c) == variables.end())
+            {
+                throw std::invalid_argument("Missing truth value for variable '" + std::string(1, c) + "'");
+            }
             operands.push(variables.at(c));
+        }
+        else if (c != ' ') // Ignore whitespace characters
+        {
+            throw std::invalid_argument("Invalid character: '" + std::string(1, c) + "'");
         }
     }
 
@@ -140,10 +132,18 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
     {
         char op = operators.top();
         operators.pop();
-        bool operand2 = operands.top();
-        operands.pop();
+        if (operands.size() < 1)
+        {
+            throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
+        }
         if (op != '!')
         {
+            bool operand2 = operands.top();
+            operands.pop();
+            if (operands.empty())
+            {
+                throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
+            }
             bool operand1 = operands.top();
             operands.pop();
             if (op == '&')
@@ -165,8 +165,14 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
         }
         else
         {
-            operands.push(NOT(operand2));
+            operands.push(NOT(operands.top()));
+            operands.pop();
         }
+    }
+
+    if (operands.size() != 1)
+    {
+        throw std::invalid_argument("Invalid expression: Unresolved operands or operators");
     }
 
     return operands.top();
