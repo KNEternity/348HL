@@ -184,7 +184,7 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
         else
         {
             if (operands.size() < 2)
-                throw std::invalid_argument("Missing operand(s) for binary operator");
+                throw std::invalid_argument("Missing closing parenthesis");
             bool operand2 = operands.top();
             operands.pop();
             bool operand1 = operands.top();
