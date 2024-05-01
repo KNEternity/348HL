@@ -44,17 +44,19 @@ int main()
                 std::cout << "\033[1;32m\nBoolean Logic Calculator\n\033[0m" << std::endl;
                 std::cout << "\033[1;31mEnter a Boolean expression or X to go back: \033[0m";
                 std::getline(std::cin, expression);
-                
                 if (expression == "X" || expression == "x")
                 {
                     break; // Exit the inner while loop
                 }
 
-                try {
+                try
+                {
                     bool result = evaluateExpression(expression, variables);
                     std::cout << "Expression: " << expression << std::endl;
                     std::cout << "Result: " << (result ? "True" : "False") << std::endl;
-                } catch (const std::exception& e) {
+                }
+                catch (const std::exception &e)
+                {
                     std::cerr << "Error: " << e.what() << std::endl;
                 }
             }

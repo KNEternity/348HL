@@ -1,6 +1,7 @@
 #include <unordered_map>
 #include <stack>
 #include <cctype>
+#include <stdexcept>
 
 bool AND(bool a, bool b)
 {
@@ -29,15 +30,24 @@ bool XOR(bool a, bool b)
 
 int getPrecedence(char op)
 {
-    if (op == '(' || op == ')')
-        return 0;
-    if (op == '&' || op == '@')
-        return 1;
-    if (op == '|' || op == '$')
-        return 2;
-    if (op == '!')
+    switch (op)
+    {
+    case '!':
         return 3;
-    return -1;
+    case '&':
+    case '@':
+        return 2;
+    case '|':
+    case '$':
+        return 1;
+    default:
+        return -1;
+    }
+}
+
+bool isOperator(char op)
+{
+    return op == '&' || op == '|' || op == '!' || op == '@' || op == '$';
 }
 
 bool evaluateExpression(const std::string &expression, const std::unordered_map<char, bool> &variables)
@@ -45,11 +55,59 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
     std::stack<bool> operands;
     std::stack<char> operators;
 
-    for (char c : expression)
+    if (expression.empty())
     {
+        throw std::invalid_argument("No operands or operators present");
+    }
+
+    for (size_t i = 0; i < expression.size(); i++)
+    {
+        char c = expression[i];
+
         if (c == 'T' || c == 'F')
         {
             operands.push(c == 'T');
+        }
+        else if (isOperator(c))
+        {
+            while (!operators.empty() && getPrecedence(operators.top()) >= getPrecedence(c))
+            {
+                char op = operators.top();
+                operators.pop();
+                if (op == '!')
+                {
+                    if (operands.empty())
+                        throw std::invalid_argument("Missing operand after 'NOT'");
+                    bool operand = operands.top();
+                    operands.pop();
+                    operands.push(NOT(operand));
+                }
+                else
+                {
+                    if (operands.size() < 2)
+                        throw std::invalid_argument("Missing operand(s) for binary operator");
+                    bool operand2 = operands.top();
+                    operands.pop();
+                    bool operand1 = operands.top();
+                    operands.pop();
+                    switch (op)
+                    {
+                    case '&':
+                        operands.push(AND(operand1, operand2));
+                        break;
+                    case '|':
+                        operands.push(OR(operand1, operand2));
+                        break;
+                    case '@':
+                        operands.push(NAND(operand1, operand2));
+                        break;
+                    case '$':
+                        operands.push(XOR(operand1, operand2));
+                        break;
+                    }
+                }
+            }
+            operators.push(c);
         }
         else if (c == '(')
         {
@@ -57,64 +115,48 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
         }
         else if (c == ')')
         {
-            if (operators.empty())
-            {
-                throw std::invalid_argument("Mismatched parentheses: Missing opening parenthesis");
-            }
-            while (operators.top() != '(')
+            while (!operators.empty() && operators.top() != '(')
             {
                 char op = operators.top();
                 operators.pop();
-                if (operands.size() < 1)
+                if (op == '!')
                 {
-                    throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
-                }
-                if (op != '!')
-                {
-                    bool operand2 = operands.top();
-                    operands.pop();
                     if (operands.empty())
-                    {
-                        throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
-                    }
-                    bool operand1 = operands.top();
+                        throw std::invalid_argument("Missing operand after 'NOT'");
+                    bool operand = operands.top();
                     operands.pop();
-                    if (op == '&')
-                    {
-                        operands.push(AND(operand1, operand2));
-                    }
-                    else if (op == '|')
-                    {
-                        operands.push(OR(operand1, operand2));
-                    }
-                    else if (op == '@')
-                    {
-                        operands.push(NAND(operand1, operand2));
-                    }
-                    else if (op == '$')
-                    {
-                        operands.push(XOR(operand1, operand2));
-                    }
+                    operands.push(NOT(operand));
                 }
                 else
                 {
-                    operands.push(NOT(operands.top()));
+                    if (operands.size() < 2)
+                        throw std::invalid_argument("Missing operand(s) for binary operator");
+                    bool operand2 = operands.top();
+                    operands.pop();
+                    bool operand1 = operands.top();
+                    operands.pop();
+                    switch (op)
+                    {
+                    case '&':
+                        operands.push(AND(operand1, operand2));
+                        break;
+                    case '|':
+                        operands.push(OR(operand1, operand2));
+                        break;
+                    case '@':
+                        operands.push(NAND(operand1, operand2));
+                        break;
+                    case '$':
+                        operands.push(XOR(operand1, operand2));
+                        break;
+                    }
                 }
             }
-            operators.pop(); // Remove the '('
+            if (operators.top() != '(')
+                throw std::invalid_argument("Mismatched parentheses");
+            operators.pop();
         }
-        else if (c == '&' || c == '|' || c == '@' || c == '$' || c == '!')
-        {
-            if (!operands.empty() && (operators.empty() || operators.top() == '(' || getPrecedence(operators.top()) < getPrecedence(c)))
-            {
-                operators.push(c);
-            }
-            else
-            {
-                throw std::invalid_argument("Invalid expression: Unexpected operator '" + std::string(1, c) + "'");
-            }
-        }
-        else if (isalpha(c))
+        else if (isalpha(c) && c != 'T' && c != 'F')
         {
             if (variables.find(c) == variables.end())
             {
@@ -122,55 +164,50 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
             }
             operands.push(variables.at(c));
         }
-        else if (c != ' ') // Ignore whitespace characters
+        else if (c != ' ')
         {
-            throw std::invalid_argument("Invalid character: '" + std::string(1, c) + "'");
+            throw std::invalid_argument("Unrecognized operator symbol: '" + std::string(1, c) + "'");
         }
     }
-
     while (!operators.empty())
     {
         char op = operators.top();
         operators.pop();
-        if (operands.size() < 1)
+        if (op == '!')
         {
-            throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
-        }
-        if (op != '!')
-        {
-            bool operand2 = operands.top();
-            operands.pop();
             if (operands.empty())
-            {
-                throw std::invalid_argument("Missing operand after '" + std::string(1, op) + "'");
-            }
-            bool operand1 = operands.top();
+                throw std::invalid_argument("Missing operand after 'NOT'");
+            bool operand = operands.top();
             operands.pop();
-            if (op == '&')
-            {
-                operands.push(AND(operand1, operand2));
-            }
-            else if (op == '|')
-            {
-                operands.push(OR(operand1, operand2));
-            }
-            else if (op == '@')
-            {
-                operands.push(NAND(operand1, operand2));
-            }
-            else if (op == '$')
-            {
-                operands.push(XOR(operand1, operand2));
-            }
+            operands.push(NOT(operand));
         }
         else
         {
-            operands.push(NOT(operands.top()));
+            if (operands.size() < 2)
+                throw std::invalid_argument("Missing operand(s) for binary operator");
+            bool operand2 = operands.top();
             operands.pop();
+            bool operand1 = operands.top();
+            operands.pop();
+            switch (op)
+            {
+            case '&':
+                operands.push(AND(operand1, operand2));
+                break;
+            case '|':
+                operands.push(OR(operand1, operand2));
+                break;
+            case '@':
+                operands.push(NAND(operand1, operand2));
+                break;
+            case '$':
+                operands.push(XOR(operand1, operand2));
+                break;
+            }
         }
     }
 
-    if (operands.size() != 1)
+    if (operands.size() != 1 || !operators.empty())
     {
         throw std::invalid_argument("Invalid expression: Unresolved operands or operators");
     }
