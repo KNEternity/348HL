@@ -36,10 +36,10 @@ int getPrecedence(char op)
         return 3;
     case '&':
     case '@':
-        return 2;
+        return 1;
     case '|':
     case '$':
-        return 1;
+        return 2;
     default:
         return -1;
     }
@@ -60,9 +60,24 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
         throw std::invalid_argument("No operands or operators present");
     }
 
+    char prevOp = ' '; // Initialize previous operator with a space character
+
     for (size_t i = 0; i < expression.size(); i++)
     {
         char c = expression[i];
+
+        if (isOperator(c))
+        {
+            if (isOperator(prevOp))
+            {
+                throw std::invalid_argument("Consecutive operators detected: '" + std::string(1, prevOp) + "' followed by '" + std::string(1, c) + "'");
+            }
+            prevOp = c;
+        }
+        else
+        {
+            prevOp = ' '; // Reset previous operator if the current character is not an operator
+        }
 
         if (c == 'T' || c == 'F')
         {
@@ -70,6 +85,13 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
         }
         else if (isOperator(c))
         {
+            if (c == '!')
+            {
+                if (!operands.empty() && operands.top())
+                {
+                    throw std::invalid_argument("NOT operator applied after an operand");
+                }
+            }
             while (!operators.empty() && getPrecedence(operators.top()) >= getPrecedence(c))
             {
                 char op = operators.top();
@@ -169,7 +191,7 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
             if (c == '=')
             {
 
-                throw std::invalid_argument("variable defined in terms of itself");
+                throw std::invalid_argument("Variable defined in terms of itself");
             }
             throw std::invalid_argument("Unrecognized operator symbol: '" + std::string(1, c) + "'");
         }
