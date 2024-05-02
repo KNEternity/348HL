@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <limits>
-#include "boolean_logic.cpp"
-#include "truth_tables.cpp"
+#include "boolean_logic.h"
+#include "truth_tables.h"
 
 int main()
 {

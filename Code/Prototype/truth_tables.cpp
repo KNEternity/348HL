@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "truth_tables.h"
 // Function to generate truth table for logical AND operation
 void generateTruthTableAND()
 {

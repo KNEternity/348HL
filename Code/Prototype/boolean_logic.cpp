@@ -1,3 +1,4 @@
+#include "boolean_logic.h"
 #include <unordered_map>
 #include <stack>
 #include <cctype>
