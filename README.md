@@ -38,7 +38,7 @@ This project revolves around creating a boolean logic simulator that replicates 
   - cd Prototype
 ### 3) Compile the project using the makefile
   - make
-### 4) Run the simluator
+### 4) Run the simulator
   - ./program
 
 ## Team information
