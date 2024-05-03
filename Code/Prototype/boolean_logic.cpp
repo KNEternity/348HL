@@ -55,6 +55,7 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
 {
     std::stack<bool> operands;
     std::stack<char> operators;
+    bool lastWasOperand = false;
 
     if (expression.empty())
     {
@@ -83,10 +84,11 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
         if (c == 'T' || c == 'F')
         {
             operands.push(c == 'T');
+            lastWasOperand = true;
         }
         else if (isOperator(c))
         {
-            if (c == '!')
+            if (c == '!' && lastWasOperand)
             {
                 if (!operands.empty() && operands.top())
                 {
@@ -131,10 +133,12 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
                 }
             }
             operators.push(c);
+            lastWasOperand = false;
         }
         else if (c == '(')
         {
             operators.push(c);
+            lastWasOperand = false;
         }
         else if (c == ')')
         {
@@ -186,6 +190,7 @@ bool evaluateExpression(const std::string &expression, const std::unordered_map<
                 throw std::invalid_argument("Missing truth value for variable '" + std::string(1, c) + "'");
             }
             operands.push(variables.at(c));
+            lastWasOperand = true;
         }
         else if (c != ' ')
         {
