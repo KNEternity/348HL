@@ -9,6 +9,7 @@ This project revolves around creating a boolean logic simulator that replicates 
   - [Software Requirements](docs/SoftwareRequirementsSpec)
   - [Software Architecture](docs/SoftwareArchitecture)
   - [User Manual](docs/userManual)
+  - [Test Cases](docs/TestCases)
 
 ## News
 - 02/19/2024: Team meeting --> introductions, roles, and set tentative timeline for project
@@ -28,6 +29,17 @@ This project revolves around creating a boolean logic simulator that replicates 
 - 04/29/2024: Team meeting --> discussed project progress, updated SRS document, and code editing
 - 05/02/2024: Completed User Manual, User test cases, and Boolean Logic Simulator implementation
 
+## Quickstart Guide
+### 1) Clone the repository:
+  - HTTPS: https://github.com/KNEternity/348HL.git
+  - SSH Key: git@github.com:KNEternity/348HL.git
+### 2) Navigate to the prototype directory:
+  - cd Code
+  - cd Prototype
+### 3) Compile the project using the makefile
+  - make
+### 4) Run the simluator
+  - ./program
 
 ## Team information
 | Name           | Role                               | Availability             |
