@@ -33,12 +33,12 @@ This project revolves around creating a boolean logic simulator that replicates 
 ### 1) Clone the repository:
    - HTTPS: https://github.com/KNEternity/348HL.git
    - SSH Key: git@github.com:KNEternity/348HL.git
-- 2) Navigate to the prototype directory:
+### 2) Navigate to the prototype directory:
    - cd Code
    - cd Prototype
-- 3) Compile the project using the makefile
+### 3) Compile the project using the makefile
    - make
-- 4) Run the simluator
+### 4) Run the simluator
    - ./program
 
 
