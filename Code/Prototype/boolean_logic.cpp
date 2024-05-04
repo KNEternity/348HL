@@ -4,6 +4,28 @@
 #include <cctype>
 #include <stdexcept>
 
+/*
+    This code block contains functions for boolean logic operations, operator precedence determination, and expression evaluation.
+    It handles logical operations like AND, OR, NOT, NAND, XOR, and evaluates expressions with variables and parentheses.
+
+    Key Functions:
+    - bool AND(bool a, bool b): Performs logical AND operation on two boolean values.
+    - bool OR(bool a, bool b): Performs logical OR operation on two boolean values.
+    - bool NOT(bool a): Performs logical NOT operation on a boolean value.
+    - bool NAND(bool a, bool b): Performs NAND operation on two boolean values.
+    - bool XOR(bool a, bool b): Performs XOR operation on two boolean values.
+    - int getPrecedence(char op): Returns the precedence level of operators for expression evaluation.
+    - bool isOperator(char op): Checks if a character is a logical operator.
+    - bool evaluateExpression(const std::string &expression, const std::unordered_map<char, bool> &variables): Evaluates a boolean expression with variables.
+
+    Error Handling:
+    - Checks for invalid expressions, missing operands, consecutive operators, and mismatched parentheses.
+    - Handles cases where operators are applied after an operand, missing operands for binary operators, and missing truth values for variables.
+    - Detects variable definitions in terms of themselves and unrecognized operator symbols.
+
+    Note: Proper error handling is implemented to ensure accurate evaluation of boolean expressions.
+*/
+
 bool AND(bool a, bool b)
 {
     return a && b;
